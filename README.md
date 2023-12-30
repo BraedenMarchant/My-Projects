@@ -1,5 +1,5 @@
 - 👋 Hi, I’m @BraedenMarchant
-- 👀 I’m interested in mechatrnoics
+- 👀 I’m interested in mechatronics
 - 🌱 I’m currently learning mechatronics engineering at McMaster University
 - 📫 How to reach me braeden.k.marchant@gmail.com
 
