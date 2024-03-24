@@ -1,0 +1,648 @@
+\documentclass[12pt]{article}
+\usepackage{ragged2e} % load the package for justification
+\usepackage{hyperref}
+\usepackage[utf8]{inputenc}
+\usepackage{pgfplots}
+\usepackage{tikz}
+\usetikzlibrary{fadings}
+\usepackage{filecontents}
+\usepackage{multirow}
+\usepackage{amsmath}
+\pgfplotsset{width=10cm,compat=1.17}
+\setlength{\parskip}{0.75em} % Set the space between paragraphs
+\usepackage{setspace}
+\setstretch{1.2} % Adjust the value as per your preference
+\usepackage[margin=2cm]{geometry} % Adjust the margin
+\setlength{\parindent}{0pt} % Adjust the value for starting paragraph
+\usetikzlibrary{arrows.meta}
+\usepackage{mdframed}
+\usepackage{float}
+
+\usepackage{hyperref}
+
+% to remove the hyperline rectangle
+\hypersetup{
+	colorlinks=true,
+	linkcolor=black,
+	urlcolor=blue
+}
+
+\usepackage{xcolor}
+\usepackage{titlesec}
+\usepackage{titletoc}
+\usepackage{listings}
+\usepackage{tcolorbox}
+\usepackage{lipsum} % Example text package
+\usepackage{fancyhdr} % Package for customizing headers and footers
+
+
+
+% Define the orange color
+\definecolor{myorange}{RGB}{255,65,0}
+% Define a new color for "cherry" (dark red)
+\definecolor{cherry}{RGB}{148,0,25}
+\definecolor{codegreen}{rgb}{0,0.6,0}
+
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% Apply the custom footer to all pages
+\pagestyle{fancy}
+
+% Redefine the header format
+\fancyhead{}
+\fancyhead[R]{\textcolor{orange!80!black}{\itshape\leftmark}}
+
+\fancyhead[L]{\textcolor{black}{\thepage}}
+
+
+% Redefine the footer format with a line before each footnote
+\fancyfoot{}
+\fancyfoot[C]{\footnotesize B. Marchant, McMaster University, Programming for Mechatronics - MECHTRON 2MP3. \footnoterule}
+
+% Redefine the footnote rule
+\renewcommand{\footnoterule}{\vspace*{-3pt}\noindent\rule{0.0\columnwidth}{0.4pt}\vspace*{2.6pt}}
+
+% Set the header rule color to orange
+\renewcommand{\headrule}{\color{orange!80!black}\hrule width\headwidth height\headrulewidth \vskip-\headrulewidth}
+
+% Set the footer rule color to orange (optional)
+\renewcommand{\footrule}{\color{black}\hrule width\headwidth height\headrulewidth \vskip-\headrulewidth}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+
+% Set the color for the section headings
+\titleformat{\section}
+{\normalfont\Large\bfseries\color{orange!80!black}}{\thesection}{1em}{}
+
+% Set the color for the subsection headings
+\titleformat{\subsection}
+{\normalfont\large\bfseries\color{orange!80!black}}{\thesubsection}{1em}{}
+
+% Set the color for the subsubsection headings
+\titleformat{\subsubsection}
+{\normalfont\normalsize\bfseries\color{orange!80!black}}{\thesubsubsection}{1em}{}
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% Set the color for the table of contents
+\titlecontents{section}
+[1.5em]{\color{orange!80!black}}
+{\contentslabel{1.5em}}
+{}{\titlerule*[0.5pc]{.}\contentspage}
+
+% Set the color for the subsections in the table of contents
+\titlecontents{subsection}
+[3.8em]{\color{orange!80!black}}
+{\contentslabel{2.3em}}
+{}{\titlerule*[0.5pc]{.}\contentspage}
+
+% Set the color for the subsubsections in the table of contents
+\titlecontents{subsubsection}
+[6em]{\color{orange!80!black}}
+{\contentslabel{3em}}
+{}{\titlerule*[0.5pc]{.}\contentspage}
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% set a format for the codes inside a box with C format
+\lstset{
+	language=C,
+	basicstyle=\ttfamily,
+	backgroundcolor=\color{blue!5},
+	keywordstyle=\color{blue},
+	commentstyle=\color{codegreen},
+	stringstyle=\color{red},
+	showstringspaces=false,
+	breaklines=true,
+	frame=single,
+	rulecolor=\color{lightgray!35}, % Set the color of the frame
+	numbers=none,
+	numberstyle=\tiny,
+	numbersep=5pt,
+	tabsize=1,
+	morekeywords={include},
+	alsoletter={\#},
+	otherkeywords={\#}
+}
+
+
+
+
+%\input listings.tex
+
+
+
+% Define a command for inline code snippets with a colored and rounded box
+\newtcbox{\codebox}[1][gray]{on line, boxrule=0.2pt, colback=blue!5, colframe=#1, fontupper=\color{cherry}\ttfamily, arc=2pt, boxsep=0pt, left=2pt, right=2pt, top=3pt, bottom=2pt}
+
+
+
+
+\tikzset{%
+	every neuron/.style={
+		circle,
+		draw,
+		minimum size=1cm
+	},
+	neuron missing/.style={
+		draw=none, 
+		scale=4,
+		text height=0.333cm,
+		execute at begin node=\color{black}$\vdots$
+	},
+}
+
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+% Define a new tcolorbox style with default options
+\tcbset{
+	myboxstyle/.style={
+		colback=orange!10,
+		colframe=orange!80!black,
+	}
+}
+
+% Define a new tcolorbox style with default options to print the output with terminal style
+
+
+\tcbset{
+	myboxstyleTerminal/.style={
+		colback=blue!5,
+		frame empty, % Set frame to empty to remove the fram
+	}
+}
+
+\mdfdefinestyle{myboxstyleTerminal1}{
+	backgroundcolor=blue!5,
+	hidealllines=true, % Remove all lines (frame)
+	leftline=false,     % Add a left line
+}
+
+
+\begin{document}
+	
+	\justifying
+	
+	\begin{center}
+		\textbf{{\large Solving System of Linear Equations}}
+		
+		\textbf{Developing a Jacobi Method solver in C} 
+		
+		Braeden Marchant
+	\end{center}
+	
+
+	
+	
+	
+	\section{Introduction}
+	In this project I will solve a system of Linear equations starting with a .mtx file that is converted into CSR format to save memmory. 
+	I will then use the Jacobi Method to solve the system in an iterative method. To then check the accuracy of the solution, the residual norm will be calculated.
+	I am also trying to optimize the time it takes to run the solver and lower the CPU time.
+
+	The Jacobi method is an iterative method to solve systems of Linear Equations.
+	The main iteration step uses the formula:
+	\begin{figure}[H]
+	\centering
+	\includegraphics{JacobiMethod.png}
+	\end{figure}
+
+	\section{What can it solve?}
+	My solver is able to get results for the b1\_ss.mtx file, however the results are no correct as I get a residual of 15.338841. 
+	This is because the b1ss.mtx file is not perfectly symmetric.
+	I am able to solve ACTIVSg70K.mtx and 2cubes\_sphere.mtx but tmt\_sym.mtx and StocF-1465.mtx are too large to solve in a reasonable amount of time.
+	
+	\section{Makefile}
+
+    The Makefile compiles each all of the required files for the main function to run.
+    The compiler used is set to gcc and the compilation flags include -Wall, -Wextra, -lm and -pg. The -W flags are to enable warning messages, the -lm is to link the math library. 
+    There are several targets in my Makefile. The first is "all" which is what will run when I just run 'make' without specifying a target. It will build the executable 'main.o and functions.o'.
+    These object files are responsible for compling the corresponding .c files.
+    The clean target removes the main executable and all the object files when running 'make clean'.
+
+	\section{Vtune and gcov}
+
+	Here is the summary when running vtune for the LFAT5.mtx file
+	\begin{figure}[H]
+		\caption{Vtune Summary}
+		\centering
+		\includegraphics{V_LFAT5.png}
+	\end{figure}
+
+	\begin{figure}[H]
+		\centering
+		\includegraphics{vtune.png}
+	\end{figure}
+
+	Here is an example of the gcov data for my main function when running the LFAT5.mtx file:
+	\begin{mdframed}[style=myboxstyleTerminal1]
+		\begin{verbatim}
+			-:    0:Source:main.c
+			-:    0:Graph:main.gcno
+			-:    0:Data:main.gcda
+			-:    0:Runs:1
+			-:    1:#include <stdio.h>
+			-:    2:#include <stdlib.h>
+			-:    3:#include <time.h>
+			-:    4:#include <math.h>
+			-:    5:#include "functions.h"
+			-:    6:
+			1:    7:int main(int argc, char *argv[])
+			-:    8:{
+			-:    9:
+			-:   10:    // <Handle the inputs here>
+			1:   11:    const char *filename = argv[1];
+			-:   12:
+			-:   13:    CSRMatrix A;
+			1:   14:    ReadMMtoCSR(filename, &A);
+			-:   15:    
+			-:   16:
+			-:   17:    // Initializing all the vector b (in Ax=b)
+			1:   18:    double *b = (double *)malloc(A.num_rows * sizeof(double));
+			-:   19:    // Set all elements of b to 1
+		   15:   20:    for (int i = 0; i < A.num_rows; ++i)
+			-:   21:    {
+		   14:   22:        b[i] = 1.0;
+			-:   23:    }
+			-:   24:
+			-:   25:    // <The rest of your code goes here>
+			1:   26:    double *y = (double *)malloc(A.num_rows * sizeof(double));
+			1:   27:    double *x = (double *)malloc(A.num_rows * sizeof(double));
+			1:   28:    double *r = (double *)malloc(A.num_rows * sizeof(double));
+			-:   29:
+			-:   30:    //DisplayCSR(&A);
+			-:   31:    
+			-:   32:    clock_t start_time, end_time;
+			-:   33:    double cpu_time_used;
+			1:   34:    start_time = clock();
+			-:   35:
+			1:   36:    jacobiSolver(&A, b, x);
+			-:   37:
+			1:   38:    end_time = clock();
+			1:   39:    cpu_time_used = ((double)(end_time - start_time)) / CLOCKS_PER_SEC;
+			-:   40:    //printf("CPU time: %f seconds\n", cpu_time_used);
+			-:   41:
+			-:   42:    //Prints out matrix X
+			-:   43:    // printf("\nMatrix X:\n");
+			-:   44:    // for (int i = 0; i < A.num_rows; ++i) {
+			-:   45:    //     printf("x[%d]=%.6f\n",i,x[i]);
+			-:   46:    // }
+			-:   47: 
+			1:   48:    spmv_csr(&A,x,y);
+			-:   49:
+			-:   50:    //prints out matrix Y
+			-:   51:    /*printf("\nMatrix A*X:\n");
+			-:   52:    for (int i=0; i < A.num_rows; ++i){
+			-:   53:        printf("y[%d]=%.6f\n",i,y[i]);
+			-:   54:    }*/
+			-:   55:    
+			1:   56:    compute_residual(&A, b, y, r);
+			-:   57:        
+			1:   58:    printf("The matrix name: %s\n",filename);
+			1:   59:    printf("The dimension of the matrix: %d by %d\n",A.num_rows,A.num_rows);
+			1:   60:    printf("Number of non-zeros: %d\n", A.num_non_zeros);
+			1:   61:    printf("CPU time taken to solve Ax=b: %f seconds\n", cpu_time_used);
+			1:   62:    compute_norm(&A, r);
+			-:   63:    
+			-:   64:}	
+		\end{verbatim}
+	\end{mdframed}
+
+	Here is an example of the gcov data for my functions.c file when running the LFAT5.mtx file:
+	\begin{mdframed}[style=myboxstyleTerminal1]
+		\begin{verbatim}
+			-:    0:Source:functions.c
+			-:    0:Graph:functions.gcno
+			-:    0:Data:functions.gcda
+			-:    0:Runs:2
+			-:    1:#include <stdbool.h>
+			-:    2:#include <stdio.h>
+			-:    3:#include <stdlib.h>
+			-:    4:#include <string.h>
+			-:    5:#include "functions.h"
+			-:    6:#include <math.h>
+			-:    7:#define BUFFER 300
+			-:    8:
+			-:    9:struct CSRMatrix {
+			-:   10:    double *csr_data;   // Array of non-zero values
+			-:   11:    int *col_ind;       // Array of column indices
+			-:   12:    int *row_ptr;       // Array of row pointers
+			-:   13:    int num_non_zeros;  // Number of non-zero elements
+			-:   14:    int num_rows;       // Number of rows in matrix
+			-:   15:    int num_cols;       // Number of columns in matrix    
+			-:   16:};
+			-:   17:
+			-:   18:struct SolverMatrix {
+			-:   19:    double *csr_data;   // Array of non-zero values
+			-:   20:    int *col_ind;       // Array of column indices
+			-:   21:    int *row_ptr;       // Array of row pointers
+			-:   22:    int num_non_zeros;  // Number of non-zero elements
+			-:   23:    int num_rows;       // Number of rows in matrix
+			-:   24:    int num_cols;       // Number of columns in matrix    
+			-:   25:};
+			-:   26:
+			-:   27:struct MarketMatrix {
+			-:   28:    int row;
+			-:   29:    int column;
+			-:   30:    double value;
+			-:   31:};
+			-:   32:
+			-:   33:
+			1:   34:void sortMarketMatrix(int size, struct MarketMatrix mm[size], int totalRows){
+			1:   35:    struct MarketMatrix *tempMM = malloc(size * sizeof(struct MarketMatrix));
+			1:   36:    int index = 0;
+			-:   37:
+			-:   38:    //Sort mm by mm.row value and put into temp array
+			-:   39:    //Start from first row (represented by i) and group struct values with the same row into a temp struct
+			-:   40:    
+		   15:   41:    for(int i = 1; i <= totalRows; i++){
+		   14:   42:        int j = 0; 
+			-:   43:
+		  434:   44:        while(j < size){ 
+		  420:   45:            if(mm[j].row == i){
+		   30:   46:                tempMM[index] = mm[j];
+		   30:   47:                index++;
+			-:   48:            }
+		  420:   49:            j++;
+			-:   50:        }
+			-:   51:    }  
+			-:   52:
+			-:   53:    //Replace unsorted market matrix struct with sorted temporary struct
+		   31:   54:    for(int i = 0; i < size; i++){
+		   30:   55:        mm[i] = tempMM[i];
+			-:   56:    } 
+			-:   57:
+			1:   58:    free(tempMM); 
+			-:   59:    
+			1:   60:}
+			-:   61:
+			-:   62:
+			2:   63:void ReadMMtoCSR(const char *filename, CSRMatrix *matrix){
+			-:   64:    struct MarketMatrix *marketMatrix;
+			-:   65:    
+			2:   66:    FILE * file = fopen (filename, "r");
+			2:   67:    if ( file == NULL ) {
+			1:   68:        printf (" Failed to open file %s: \n", filename);
+			1:   69:        return;
+			-:   70:    } 
+			-:   71:
+			-:   72:    char line[BUFFER];
+			1:   73:    int mmRowCount = 0;
+			1:   74:    int mmCount = 0;
+		   49:   75:    while (fgets(line, BUFFER, file) != NULL)
+			-:   76:    {   
+			-:   77:        //FOR DEBUG
+			-:   78:        //printf("line: %s\n", line);
+			-:   79:        
+			-:   80:        //Ignore comment lines
+		   48:   81:        if(line[0] != '%'){
+			-:   82:            
+		   31:   83:            mmRowCount++;
+			-:   84:            
+			-:   85:            //If first row, set applicable matrix info in CSR
+		   31:   86:            if(mmRowCount == 1){
+			1:   87:                sscanf(line, "%d %d %d", &matrix->num_rows, &matrix->num_cols, &matrix->num_non_zeros);
+			-:   88:
+			-:   89:                //printf("rows: %d, columns: %d, non-zeroes: %d", matrix->num_rows, matrix->num_cols, matrix->num_non_zeros);
+			-:   90:
+			-:   91:                //allocate memory for arrays
+			1:   92:                matrix->csr_data = (double*)malloc(matrix->num_non_zeros * sizeof(double));
+			1:   93:                matrix->col_ind = (int*)malloc(matrix->num_non_zeros * sizeof(int));
+			1:   94:                matrix->row_ptr = (int*)malloc((matrix->num_rows + 1) * sizeof(int));
+			-:   95:                
+			1:   96:                marketMatrix = malloc(matrix->num_non_zeros * sizeof(struct MarketMatrix));
+			-:   97:
+			1:   98:                continue;
+			-:   99:            }
+			-:  100:                        
+		   30:  101:            sscanf(line, "%d %d %lf", &marketMatrix[mmCount].row, &marketMatrix[mmCount].column, &marketMatrix[mmCount].value);
+		   30:  102:            mmCount++;
+			-:  103:        }
+			-:  104:    }
+			-:  105:
+			-:  106:    // printf("\nUNSORTED: \n");
+			-:  107:    // for(int i = 0; i < matrix->num_non_zeros; i++){
+			-:  108:    //     printf("%d %d %lf\n", mm[i].row, mm[i].column, mm[i].value);
+			-:  109:    // }
+			-:  110:    
+			-:  111:    //Sort Market Matrix in row ascending order to correctly retrieve values to set in CSR
+			1:  112:    sortMarketMatrix(matrix->num_non_zeros, marketMatrix, matrix->num_rows); 
+			-:  113:
+			-:  114:    // printf("\nSORTED: \n");
+			-:  115:    // for(int i = 0; i < matrix->num_non_zeros; i++){
+			-:  116:        
+			-:  117:    //     printf("%d %d %lf\n", mm[i].row, mm[i].column, mm[i].value);
+			-:  118:    // }
+			-:  119:
+			1:  120:    int nzTotalInRow = 1; //counts the number of non-zero values in a row
+			1:  121:    int nzRowIndex = 0; //
+			1:  122:    int *nzRowSet = malloc(matrix->num_rows * sizeof(int)); //stores the total number of non-zero values per row
+			-:  123:    
+			-:  124:    //Set CSR values and do initial calculation for row pointer values
+		   31:  125:    for(int i = 0; i < matrix->num_non_zeros; i++){
+		   30:  126:        matrix->col_ind[i] = marketMatrix[i].column-1;
+		   30:  127:        matrix->csr_data[i] = marketMatrix[i].value;
+			-:  128:   
+		   30:  129:        if(marketMatrix[i].row == marketMatrix[i+1].row){
+		   16:  130:            nzTotalInRow++; //count number of non-zero values in row
+			-:  131:        } else {
+		   14:  132:            nzRowSet[nzRowIndex] = nzTotalInRow;
+		   14:  133:            nzTotalInRow = 1;
+			-:  134:
+		   14:  135:            if(nzRowIndex < matrix->num_rows - 1){
+		   13:  136:                nzRowIndex++;
+			-:  137:            }
+			-:  138:        }
+			-:  139:    }
+			-:  140:
+			-:  141:    //Calculate row pointer values
+		   16:  142:    for(int i = 0; i <= nzRowIndex + 1; i++){ 
+			-:  143:        //printf("i: %d, nzRowSet: %d\n", i, nzRowSet[i]);    
+		   15:  144:        if(i == 0){
+			1:  145:            matrix->row_ptr[i] = 0;  
+			-:  146:        } else {
+		   14:  147:            matrix->row_ptr[i] = matrix->row_ptr[i-1] + nzRowSet[i-1];
+			-:  148:        }
+			-:  149:    }
+			-:  150:
+			-:  151:    //free memmory
+			1:  152:    free(nzRowSet);
+			1:  153:    free(marketMatrix);
+			1:  154:    fclose(file);
+			-:  155:}
+			-:  156:
+			-:  157:
+			2:  158:void spmv_csr(const CSRMatrix *A, const double *x, double *y){
+		   16:  159:    for (int i=0; i < A->num_rows; ++i){
+		   14:  160:        y[i]=0.0;
+			-:  161:        // goes through each row using the row ptr and multiplies the value of A by each of the x columns 
+		   44:  162:        for (int j = A->row_ptr[i]; j < A->row_ptr[i+1]; j++){
+		   30:  163:            y[i] += (A->csr_data[j] * x[A->col_ind[j]]);
+			-:  164:        }
+			-:  165:    }
+			2:  166:}
+			-:  167:
+			-:  168:
+		#####:  169:void DisplayCSR(const CSRMatrix *A){
+			-:  170:    // printf("matrix num row: %d, matrix num col: %d, matrix num non zeros: %d\n", matrix->num_rows, matrix->num_cols, matrix->num_non_zeros);
+		#####:  171:    printf("\nNumber of non-zeros: %d\n", A->num_non_zeros);
+		#####:  172:    printf("Row Pointer: ");
+		#####:  173:    for(int i = 0; i < (A->num_rows + 1); i++){
+		#####:  174:        printf("%d ", A->row_ptr[i]);
+			-:  175:    }
+			-:  176:
+		#####:  177:    printf("\nColumn Index: ");
+		#####:  178:    for(int i = 0; i < A->num_non_zeros; i++){
+		#####:  179:        printf("%d ", A->col_ind[i]);
+			-:  180:    }
+			-:  181:
+		#####:  182:    printf("\nValues: ");
+		#####:  183:    for(int i = 0; i < A->num_non_zeros; i++){
+		#####:  184:        printf("%lf ", A->csr_data[i]);
+			-:  185:    }
+			-:  186:
+		#####:  187:}
+			-:  188:
+			-:  189:
+			-:  190:#define MAX_ITER 1000
+			-:  191:#define EPSILON 1e-6
+			-:  192:
+			-:  193://Function to perform Jacobi iteration
+			2:  194:void jacobiSolver(const CSRMatrix *A,const double *b, double *x) {
+			2:  195:    int n=A->num_rows;
+			2:  196:    double *x_new = (double *)malloc(n * sizeof(double));
+			-:  197:    int k;
+			-:  198:
+			7:  199:    for (k = 0; k < MAX_ITER; ++k) {
+		   91:  200:        for (int i = 0; i < n; ++i) {
+		   84:  201:            double sigma = 0.0;
+		  264:  202:            for (int j = A->row_ptr[i]; j < A->row_ptr[i + 1]; ++j) {
+		  180:  203:                if (A->col_ind[j] != i) {
+		   96:  204:                    sigma += A->csr_data[j] * x[A->col_ind[j]];
+			-:  205:                }
+			-:  206:            }
+		   84:  207:            x_new[i] = (b[i] - sigma) / A->csr_data[A->row_ptr[i + 1] - 1];
+			-:  208:        }
+			-:  209:
+			-:  210:        // Check for convergence
+			7:  211:        double max_diff = 0.0;
+		   91:  212:        for (int i = 0; i < n; ++i) {
+		   84:  213:            double diff = fabs(x_new[i] - x[i]);
+		   84:  214:            if (diff > max_diff) {
+		   23:  215:                max_diff = diff;
+			-:  216:            }
+			-:  217:        }
+			-:  218:
+			-:  219:        //prints num iterations after convergence is reached
+			7:  220:        if (max_diff < EPSILON) {
+			2:  221:            printf("Convergence reached after %d iterations.\n", k + 1);
+			2:  222:            break;
+			-:  223:        }
+			-:  224:
+			-:  225:        // Update x for the next iteration
+		   75:  226:        for (int i = 0; i < n; ++i) {
+		   70:  227:            x[i] = x_new[i];
+			-:  228:        }
+			-:  229:    }
+			2:  230:    free(x_new);
+			2:  231:}
+			-:  232:
+			2:  233:void compute_residual(const CSRMatrix *A, double *b, double *y, double *r){
+		   16:  234:    for (int i = 0; i < A->num_rows; ++i){
+		   14:  235:        r[i]=y[i]-b[i];
+			-:  236:        //printf("r[%d]=%f\n",i,r[i]);
+			-:  237:    }
+			2:  238:}
+			-:  239:
+			2:  240:void compute_norm(const CSRMatrix *A, double *r){
+			2:  241:    double mag = 0.0;
+			2:  242:    double sum = 0.0;
+		   16:  243:    for (int i = 0; i < A->num_rows; ++i){
+		   14:  244:        sum += r[i]*r[i];
+			-:  245:        //printf("sum:%f",sum);
+		   14:  246:        mag = sqrt(sum);
+			-:  247:    }
+			2:  248:    printf("Residual Norm: %f\n", mag);
+			2:  249:}		
+		\end{verbatim}
+	\end{mdframed}
+	We can see here which lines of code are being run and the number of times they are run.
+	It is mostly the loops inside my sort function and the jacobi solve function that take the most amount of time
+	
+	\subsection{Results and Tables}
+	
+	I have run my program for the following .mtx files and these are the results
+
+    \begin{table}[h!]
+		\caption{Results}
+		\label{table:1}
+		\centering
+		\begin{tabular}{c c c c c c}
+			\hline
+			Problem & \multicolumn{2}{c}{Size} & non-zeroes & CPU time (Sec) & Residual \\
+			& & $row$ & $column$ & \\
+			\hline
+            LFAT5.mtx & 14 & 14 & 30 & 0.000000 & 0.000000 \\
+			LF10.mtx & 18 &  & 18 & 0.000000 & 0.000000 \\
+			ex3.mtx & 1821 & 1821 & 27253 & 0.030013 & 0.014618 \\
+			jnlbrng1.mtx & 40000 & 40000 & 119600 & 0.010001 & 0.000560 \\
+			ACTIVSg70K.mtx & 69999   & 69999 & 154313 & 0.020005 & 0.000122 \\
+			2cubes\_sphere.mtx & 101492  & 101492 & 874378 & 0.050029 & 0.002300 \\
+			tmt\_sym.mtx & n/a & n/a & n/a & n/a & n/a \\
+			StocF-1465.mtx & n/a & n/a & n/a & n/a & n/a \\ 
+			\hline
+		\end{tabular}
+	\end{table}
+
+	\begin{figure}[H]
+		\caption{LFAT5.mtx}
+		\centering
+		\includegraphics{LFAT5.png}
+	\end{figure}
+
+
+	\begin{figure}[H]
+		\caption{LF10.mtx}
+		\centering
+		\includegraphics{LF10.png}
+	\end{figure}
+
+
+	\begin{figure}[H]
+		\caption{ex3.mtx}
+		\centering
+		\includegraphics{ex3.png}
+	\end{figure}
+
+	\begin{figure}[H]
+		\caption{jnlbrng1.mtx}
+		\centering
+		\includegraphics{jnlbrng1.png}
+	\end{figure}
+
+
+	\begin{figure}[H]
+		\caption{ACTIVSg70K.mtx}
+		\centering
+		\includegraphics{ACTIVSg70K.png}
+	\end{figure}
+
+	\begin{figure}[H]
+		\caption{2cubes\_sphere.mtx}
+		\centering
+		\includegraphics{2cubes_sphere.png}
+	\end{figure}
+	
+	\begin{figure}[H]
+		\caption{b1\_ss.mtx}
+		\centering
+		\includegraphics{b1_ss.png}
+	\end{figure}
+
+	
+		
+\end{document}
