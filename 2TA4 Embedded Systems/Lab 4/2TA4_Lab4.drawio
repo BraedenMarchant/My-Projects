@@ -1,0 +1,101 @@
+<mxfile host="app.diagrams.net" modified="2024-03-18T04:59:56.969Z" agent="Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/605.1.15 (KHTML, like Gecko) Version/17.4 Safari/605.1.15" etag="3pCM7NaPpYhpWl5XmaAd" version="24.0.7" type="device">
+  <diagram name="Page-1" id="cu9faYoG9bqk19_Fzuf-">
+    <mxGraphModel dx="2506" dy="1396" grid="0" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="0" pageScale="1" pageWidth="850" pageHeight="1100" math="0" shadow="0">
+      <root>
+        <mxCell id="0" />
+        <mxCell id="1" parent="0" />
+        <mxCell id="SmS7H-HTRP8ztLkoBlbw-20" value="" style="edgeStyle=none;curved=1;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;fontSize=12;startSize=8;endSize=8;" edge="1" parent="1" source="SmS7H-HTRP8ztLkoBlbw-1" target="SmS7H-HTRP8ztLkoBlbw-19">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="SmS7H-HTRP8ztLkoBlbw-27" value="Sensor greater than threshold condition" style="edgeLabel;html=1;align=center;verticalAlign=middle;resizable=0;points=[];fontSize=12;" vertex="1" connectable="0" parent="SmS7H-HTRP8ztLkoBlbw-20">
+          <mxGeometry x="-0.0758" y="4" relative="1" as="geometry">
+            <mxPoint x="-4" y="28" as="offset" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="SmS7H-HTRP8ztLkoBlbw-1" value="Take room temp and set thresh" style="ellipse;whiteSpace=wrap;html=1;aspect=fixed;" vertex="1" parent="1">
+          <mxGeometry x="97" y="22" width="100" height="100" as="geometry" />
+        </mxCell>
+        <mxCell id="SmS7H-HTRP8ztLkoBlbw-6" value="" style="shape=flexArrow;endArrow=classic;startArrow=classic;html=1;rounded=0;fontSize=12;startSize=8;endSize=8;curved=1;exitX=1;exitY=0.5;exitDx=0;exitDy=0;" edge="1" parent="1" source="SmS7H-HTRP8ztLkoBlbw-8">
+          <mxGeometry width="100" height="100" relative="1" as="geometry">
+            <mxPoint x="-10" y="71.41" as="sourcePoint" />
+            <mxPoint x="100" y="71" as="targetPoint" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="SmS7H-HTRP8ztLkoBlbw-24" value="Left TS press" style="edgeLabel;html=1;align=center;verticalAlign=middle;resizable=0;points=[];fontSize=12;" vertex="1" connectable="0" parent="SmS7H-HTRP8ztLkoBlbw-6">
+          <mxGeometry x="0.0038" y="2" relative="1" as="geometry">
+            <mxPoint as="offset" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="SmS7H-HTRP8ztLkoBlbw-16" value="" style="edgeStyle=none;curved=1;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;fontSize=12;startSize=8;endSize=8;" edge="1" parent="1" source="SmS7H-HTRP8ztLkoBlbw-8" target="SmS7H-HTRP8ztLkoBlbw-15">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="SmS7H-HTRP8ztLkoBlbw-8" value="Decrease thresh by 0.5" style="ellipse;whiteSpace=wrap;html=1;aspect=fixed;" vertex="1" parent="1">
+          <mxGeometry x="-236" y="19" width="106" height="106" as="geometry" />
+        </mxCell>
+        <mxCell id="SmS7H-HTRP8ztLkoBlbw-14" value="" style="edgeStyle=none;curved=1;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;fontSize=12;startSize=8;endSize=8;" edge="1" parent="1" source="SmS7H-HTRP8ztLkoBlbw-9" target="SmS7H-HTRP8ztLkoBlbw-13">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="SmS7H-HTRP8ztLkoBlbw-9" value="Increase thresh by 0.5" style="ellipse;whiteSpace=wrap;html=1;aspect=fixed;" vertex="1" parent="1">
+          <mxGeometry x="435" y="22" width="100" height="100" as="geometry" />
+        </mxCell>
+        <mxCell id="SmS7H-HTRP8ztLkoBlbw-12" value="" style="shape=flexArrow;endArrow=classic;startArrow=classic;html=1;rounded=0;fontSize=12;startSize=8;endSize=8;curved=1;exitX=1;exitY=0.5;exitDx=0;exitDy=0;entryX=0;entryY=0.5;entryDx=0;entryDy=0;" edge="1" parent="1" source="SmS7H-HTRP8ztLkoBlbw-1" target="SmS7H-HTRP8ztLkoBlbw-9">
+          <mxGeometry width="100" height="100" relative="1" as="geometry">
+            <mxPoint x="136" y="205" as="sourcePoint" />
+            <mxPoint x="372" y="72" as="targetPoint" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="SmS7H-HTRP8ztLkoBlbw-26" value="Right TS press" style="edgeLabel;html=1;align=center;verticalAlign=middle;resizable=0;points=[];fontSize=12;" vertex="1" connectable="0" parent="SmS7H-HTRP8ztLkoBlbw-12">
+          <mxGeometry x="-0.0048" y="-2" relative="1" as="geometry">
+            <mxPoint y="-4" as="offset" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="SmS7H-HTRP8ztLkoBlbw-17" style="edgeStyle=none;curved=1;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;entryX=0.5;entryY=0;entryDx=0;entryDy=0;fontSize=12;startSize=8;endSize=8;" edge="1" parent="1" source="SmS7H-HTRP8ztLkoBlbw-13" target="SmS7H-HTRP8ztLkoBlbw-1">
+          <mxGeometry relative="1" as="geometry">
+            <Array as="points">
+              <mxPoint x="474" y="-123" />
+            </Array>
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="SmS7H-HTRP8ztLkoBlbw-13" value="Indicate press" style="ellipse;whiteSpace=wrap;html=1;aspect=fixed;" vertex="1" parent="1">
+          <mxGeometry x="655" y="22" width="100" height="100" as="geometry" />
+        </mxCell>
+        <mxCell id="SmS7H-HTRP8ztLkoBlbw-18" style="edgeStyle=none;curved=1;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;entryX=0.5;entryY=0;entryDx=0;entryDy=0;fontSize=12;startSize=8;endSize=8;" edge="1" parent="1" source="SmS7H-HTRP8ztLkoBlbw-15" target="SmS7H-HTRP8ztLkoBlbw-1">
+          <mxGeometry relative="1" as="geometry">
+            <Array as="points">
+              <mxPoint x="-63" y="-83" />
+            </Array>
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="SmS7H-HTRP8ztLkoBlbw-15" value="Indicate press" style="ellipse;whiteSpace=wrap;html=1;" vertex="1" parent="1">
+          <mxGeometry x="-537" y="24" width="104" height="96" as="geometry" />
+        </mxCell>
+        <mxCell id="SmS7H-HTRP8ztLkoBlbw-22" value="" style="edgeStyle=none;curved=1;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;fontSize=12;startSize=8;endSize=8;" edge="1" parent="1" source="SmS7H-HTRP8ztLkoBlbw-19" target="SmS7H-HTRP8ztLkoBlbw-21">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="SmS7H-HTRP8ztLkoBlbw-28" value="Ramp up finishes" style="edgeLabel;html=1;align=center;verticalAlign=middle;resizable=0;points=[];fontSize=12;" vertex="1" connectable="0" parent="SmS7H-HTRP8ztLkoBlbw-22">
+          <mxGeometry x="-0.0728" y="1" relative="1" as="geometry">
+            <mxPoint as="offset" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="SmS7H-HTRP8ztLkoBlbw-19" value="Ramp up fan speed" style="ellipse;whiteSpace=wrap;html=1;aspect=fixed;" vertex="1" parent="1">
+          <mxGeometry x="97" y="284" width="100" height="100" as="geometry" />
+        </mxCell>
+        <mxCell id="SmS7H-HTRP8ztLkoBlbw-23" style="edgeStyle=none;curved=1;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;fontSize=12;startSize=8;endSize=8;" edge="1" parent="1" source="SmS7H-HTRP8ztLkoBlbw-21" target="SmS7H-HTRP8ztLkoBlbw-1">
+          <mxGeometry relative="1" as="geometry">
+            <Array as="points">
+              <mxPoint x="407" y="330" />
+            </Array>
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="SmS7H-HTRP8ztLkoBlbw-29" value="Threshold greater than sensor condition" style="edgeLabel;html=1;align=center;verticalAlign=middle;resizable=0;points=[];fontSize=12;" vertex="1" connectable="0" parent="SmS7H-HTRP8ztLkoBlbw-23">
+          <mxGeometry x="-0.3092" y="59" relative="1" as="geometry">
+            <mxPoint x="16" as="offset" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="SmS7H-HTRP8ztLkoBlbw-21" value="Full fan speed" style="ellipse;whiteSpace=wrap;html=1;aspect=fixed;" vertex="1" parent="1">
+          <mxGeometry x="97" y="535" width="100" height="100" as="geometry" />
+        </mxCell>
+      </root>
+    </mxGraphModel>
+  </diagram>
+</mxfile>
